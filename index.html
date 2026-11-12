@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Git 101</title>
+  <meta name="description" content="Học Git bằng mô phỏng: cơ bản cho mọi bộ phận, chuyên sâu cho dev, và học qua giao diện app kiểu Fork.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>try { var t = localStorage.getItem('gl-theme'); if (t) document.documentElement.dataset.theme = JSON.parse(t); } catch (e) {}</script>
+  <link rel="stylesheet" href="css/tokens-and-base.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/slide-player.css">
+  <link rel="stylesheet" href="css/sim-widget-classic.css">
+  <link rel="stylesheet" href="css/sim-widget-fork-style.css">
+  <link rel="stylesheet" href="css/static-visuals.css">
+  <link rel="stylesheet" href="css/sim-widget-submodule.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="logo" href="#"><span class="logo-mark">⑂</span>Git<span>101</span></a>
+    <div class="nav-right">
+      <span class="mono stamp">BẢN HỌC TƯƠNG TÁC · 2026</span>
+      <button class="btn ghost icon" id="theme" aria-label="Đổi giao diện sáng/tối">◐</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-text">
+      <span class="mono-tag">XEM · BẤM · HIỂU</span>
+      <h1>Học Git bằng <em>bấm thử</em>,<br>không phải đọc.</h1>
+      <p>Mỗi bài vài slide. Mỗi slide một hình. Mô phỏng chạy ngay trên trang — làm hỏng cũng không sao.</p>
+      <button class="btn pri lg" id="start">Bắt đầu học →</button>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-head"><span class="mono">git log --graph</span><span class="live">● live</span></div>
+        <div id="hero-graph" class="hero-graph"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="learn" class="learn">
+    <h2 class="sec-title">Chọn cách học</h2>
+    <div id="modes" class="modes" role="group" aria-label="Chế độ học"></div>
+    <div class="lessons-head"><h2 id="lessons-title" class="sec-title"></h2><span class="mono meta">tiến độ lưu trên trình duyệt</span></div>
+    <div id="lessons" class="lessons"></div>
+  </main>
+
+  <footer class="foot"><span class="mono">Git 101 — mô phỏng chạy hoàn toàn trên trình duyệt, không cần cài Git.</span></footer>
+
+  <script src="js/git-sim-engine.js"></script>
+  <script src="js/git-sim-branch-remote-ops.js"></script>
+  <script src="js/git-graph-renderer.js"></script>
+  <script src="js/sim-actions-and-goals.js"></script>
+  <script src="js/sim-widget-classic.js"></script>
+  <script src="js/fork-ui-icons-and-fake-data.js"></script>
+  <script src="js/fork-ui-chrome-and-sidebar.js"></script>
+  <script src="js/fork-ui-local-changes-view.js"></script>
+  <script src="js/fork-ui-all-commits-view.js"></script>
+  <script src="js/sim-widget-fork-style.js"></script>
+  <script src="js/sim-widget-submodule.js"></script>
+  <script src="js/static-visuals.js"></script>
+  <script src="js/slide-player.js"></script>
+  <script src="js/lessons-basic.js"></script>
+  <script src="js/lessons-advanced.js"></script>
+  <script src="js/lessons-fork-gui.js"></script>
+  <script src="js/app-home.js"></script>
+</body>
+</html>

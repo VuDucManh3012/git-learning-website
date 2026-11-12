@@ -1,0 +1,59 @@
+/* Home: nav, hero, mode picker, lesson cards */
+.nav, .hero, .learn, .foot { max-width: 1180px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding-top: 20px; padding-bottom: 20px; }
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 20px; color: var(--ink); text-decoration: none; letter-spacing: -0.03em; }
+.logo span:last-child { color: var(--accent); }
+.logo-mark { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: var(--ink); color: var(--bg); font-size: 18px; }
+.nav-right { display: flex; align-items: center; gap: 14px; }
+.stamp { color: var(--ink-3); }
+
+.hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-top: 48px; padding-bottom: 72px; }
+.hero h1 { font-size: clamp(38px, 5.4vw, 66px); font-weight: 800; margin: 14px 0 18px; letter-spacing: -0.035em; text-wrap: balance; }
+.hero p { color: var(--ink-2); font-size: 18px; max-width: 30em; margin-bottom: 28px; }
+.hero-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow); overflow: hidden; }
+.hero-card-head { display: flex; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid var(--line); color: var(--ink-3); }
+.live { font: 600 11px var(--f-mono); color: var(--ok); animation: blink 2s infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+.hero-graph { padding: 18px 8px; overflow-x: auto; display: flex; justify-content: center; }
+
+.learn { padding-bottom: 80px; }
+.sec-title { font-size: 26px; font-weight: 800; margin-bottom: 18px; }
+.modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 44px; }
+.mode { display: flex; align-items: center; gap: 14px; text-align: left; padding: 18px; border-radius: var(--r-lg);
+  border: 1.5px solid var(--line); background: var(--surface); transition: border-color .15s, transform .15s; }
+.mode:hover { transform: translateY(-2px); border-color: var(--ink-3); }
+.mode.on { border-color: var(--ink); box-shadow: var(--shadow); }
+.mode-ico { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: 14px; background: var(--sunk); font-size: 22px; }
+.mode.on .mode-ico { background: var(--accent-soft); }
+.mode-txt { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.mode-txt b { font-size: 17px; }
+.mode-txt small { color: var(--ink-2); font-size: 13px; }
+.mode-prog { color: var(--ink-3); }
+
+.lessons-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.lessons-head .meta { color: var(--ink-3); }
+.lessons { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.card { display: flex; flex-direction: column; gap: 10px; padding: 20px; border-radius: var(--r-lg); background: var(--surface);
+  border: 1px solid var(--line); animation: rise .4s var(--d) both; transition: transform .15s, box-shadow .15s; }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+.card-top { display: flex; justify-content: space-between; align-items: center; }
+.num { font-size: 13px; color: var(--ink-3); }
+.tick { font-size: 12px; font-weight: 600; color: var(--ok); background: var(--ok-soft); padding: 2px 9px; border-radius: 99px; }
+.card h3 { font-size: 20px; font-weight: 700; }
+.card p { color: var(--ink-2); font-size: 14px; flex: 1; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span { font: 500 11px var(--f-mono); padding: 3px 8px; border-radius: 6px; background: var(--sunk); color: var(--ink-2); }
+.card-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 6px; }
+.card-foot .meta { color: var(--ink-3); font-size: 11px; }
+.foot { padding-top: 24px; padding-bottom: 40px; border-top: 1px solid var(--line); color: var(--ink-3); }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 20px; }
+  .modes { grid-template-columns: 1fr; }
+  .stamp { display: none; }
+}
+@media (max-width: 520px) {
+  .nav, .hero, .learn, .foot { padding-left: 16px; padding-right: 16px; }
+  .lessons-head { flex-direction: column; gap: 0; margin-bottom: 8px; }
+}

@@ -1,0 +1,50 @@
+/* Concept visuals: snapshots, flow, terminal, compare, tiles, static graph */
+.v-snaps { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 12px; padding-top: 18px; }
+.v-snaps::before { content: ''; position: absolute; left: 8%; right: 8%; top: 29px; height: 3px; background: var(--line); border-radius: 3px; }
+.v-snap { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; animation: rise .5s var(--d) both; }
+.v-snap-dot { width: 24px; height: 24px; border-radius: 99px; background: var(--accent); border: 4px solid var(--bg); box-shadow: 0 0 0 2px var(--accent); }
+.v-snap b { font: 600 13px var(--f-mono); margin-top: 6px; }
+.v-snap small { font-size: 13px; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); padding: 10px; border-radius: var(--r); width: 100%; min-height: 64px; display: grid; place-items: center; }
+
+.v-flow { position: relative; display: flex; align-items: stretch; gap: 0; }
+.v-flow-box { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; padding: 18px 10px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); animation: rise .5s var(--d) both; }
+.v-flow-box b { font-size: 16px; } .v-flow-box small { font-size: 12.5px; color: var(--ink-2); }
+.v-ico { font-size: 30px; line-height: 1.2; }
+.v-flow-arrow { flex: 0 0 64px; display: flex; align-items: center; justify-content: center; position: relative; }
+.v-flow-arrow::before { content: ''; position: absolute; left: 6px; right: 6px; top: 50%; border-top: 2px dashed var(--ink-3); }
+.v-flow-arrow span { position: relative; font: 600 11px var(--f-mono); background: var(--bg); padding: 2px 4px; color: var(--accent); }
+.v-packet { position: absolute; top: -6px; left: 0; width: 12px; height: 12px; border-radius: 99px; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); animation: travel 4s ease-in-out infinite; }
+@keyframes travel { 0% { left: 8%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 90%; opacity: 0; } }
+
+.v-term { background: var(--term-bg); color: var(--term-ink); border-radius: var(--r-lg); padding: 16px 20px 20px; font: 14px/1.75 var(--f-mono); box-shadow: var(--shadow); overflow-x: auto; }
+.v-term-bar { display: flex; gap: 6px; margin-bottom: 12px; }
+.v-term-bar i { width: 10px; height: 10px; border-radius: 99px; background: #3a3a42; }
+.v-tl { white-space: pre; animation: rise .3s var(--d) both; min-height: 1.75em; }
+.v-tl.c { color: #fff; } .v-tl.c::first-letter { color: var(--accent); }
+.v-tl.m { color: var(--term-dim); } .v-tl.o { color: #a9d8ff; }
+
+.v-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.v-cmp-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px; display: flex; flex-direction: column; gap: 10px; min-width: 0; animation: rise .4s both; }
+.v-cmp-card:nth-child(2) { animation-delay: .15s; }
+.v-cmp-card h4 { font-size: 18px; }
+.v-cmp-card p { color: var(--ink-2); }
+.v-cmp-card code { display: block; width: fit-content; max-width: 100%; }
+.tone-good { border-color: var(--ok); } .tone-good h4 { color: var(--ok); }
+.tone-bad { border-color: var(--err); } .tone-bad h4 { color: var(--err); }
+.v-cmp-card .v-graph { background: var(--surface-2); border-radius: var(--r); overflow-x: auto; }
+
+.v-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.v-tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 20px 14px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; animation: rise .4s var(--d) both; }
+.v-tile b { font-size: 15px; } .v-tile small { color: var(--ink-2); font-size: 12.5px; }
+.v-graph { overflow-x: auto; padding: 8px 0; }
+
+@media (max-width: 760px) {
+  .v-flow { flex-direction: column; }
+  .v-flow-arrow { flex: 0 0 40px; }
+  .v-flow-arrow::before { left: 50%; right: auto; top: 4px; bottom: 4px; border-top: 0; border-left: 2px dashed var(--ink-3); }
+  .v-packet { display: none; }
+  .v-cmp { grid-template-columns: 1fr; }
+  .v-snaps { grid-auto-flow: row; }
+  .v-snaps::before { display: none; }
+}

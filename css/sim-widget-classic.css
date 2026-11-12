@@ -1,0 +1,84 @@
+/* Classic simulator + shared pieces (goals, graph, conflict) */
+.sim { display: grid; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow); }
+
+/* Goals checklist (also used by Fork widget) */
+.goals { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.goal { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 99px; font-size: 14px; border: 1px solid var(--line); color: var(--ink-3); }
+.goal-dot { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 99px; background: var(--sunk); font: 600 11px var(--f-mono); }
+.goal.is-now { color: var(--ink); border-color: var(--accent); background: var(--accent-soft); }
+.goal.is-now .goal-dot { background: var(--accent); color: var(--on-accent); }
+.goal.is-done { color: var(--ok); border-color: transparent; background: var(--ok-soft); }
+.goal.is-done .goal-dot { background: var(--ok); color: #fff; }
+.goal-fin { margin-top: 8px; font-weight: 600; color: var(--ok); animation: rise .3s both; }
+.sim-goals:empty { display: none; }
+
+/* Zones */
+.zones { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 6px; align-items: stretch; }
+.zones.no-remote { grid-template-columns: 1fr auto 1fr auto 1fr; }
+.zone { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; min-height: 112px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.zone h5 { font-size: 14px; font-weight: 700; display: flex; flex-direction: column; }
+.zone h5 small { font-weight: 400; font-size: 11px; color: var(--ink-3); }
+.z-work { border-top: 3px solid var(--warn); } .z-stage { border-top: 3px solid var(--b1); }
+.z-local { border-top: 3px solid var(--b2); } .z-remote { border-top: 3px solid var(--b3); }
+.arrow { display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.arrow span { font: 500 10px var(--f-mono); color: var(--ink-3); white-space: nowrap; writing-mode: horizontal-tb; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.zone-empty { font-size: 12px; color: var(--ink-3); font-style: italic; }
+.chip { display: inline-flex; align-items: center; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); font: 500 12px var(--f-mono); overflow: hidden; }
+.chip i { font-style: normal; font-size: 10px; padding: 0 6px; align-self: stretch; display: grid; place-items: center; background: var(--warn-soft); color: var(--warn); }
+.chip.k-A i { background: var(--ok-soft); color: var(--ok); }
+.chip-main { border: 0; background: none; padding: 5px 8px; font: inherit; }
+.chip-main:hover { background: var(--sunk); }
+.chip-x { border: 0; border-left: 1px solid var(--line); background: none; padding: 0 8px; color: var(--err); font-weight: 700; align-self: stretch; }
+.chip-x:hover { background: var(--err-soft); }
+.z-commit { display: flex; flex-direction: column; font-size: 13px; min-width: 0; }
+.z-commit b { font: 600 12px var(--f-mono); }
+.z-commit span { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.badge { align-self: flex-start; margin-top: auto; font: 500 11px var(--f-mono); padding: 2px 8px; border-radius: 99px; background: var(--sunk); color: var(--ink-2); }
+.badge.warn { background: var(--warn-soft); color: var(--warn); }
+.badge.info { background: color-mix(in srgb, var(--b1) 14%, transparent); color: var(--b1); }
+.badge.ok { background: var(--ok-soft); color: var(--ok); }
+
+/* Graph */
+.sim-graph { overflow-x: auto; background: var(--surface-2); border-radius: var(--r); border: 1px solid var(--line); padding: 6px 0; scroll-behavior: smooth; }
+.g-svg { display: block; overflow: visible; }
+.g-edge { fill: none; stroke-width: 3; stroke-linecap: round; opacity: .8; }
+.g-dot { stroke: var(--surface); stroke-width: 3; }
+.g-merge { stroke: currentColor; }
+.g-mate .g-dot { stroke: var(--ink-3); }
+.g-halo { fill: none; stroke-width: 2; opacity: .45; }
+.g-hash { font: 10px var(--f-mono); fill: var(--ink-3); text-anchor: middle; }
+.g-new { animation: pop .45s cubic-bezier(.3, 1.6, .5, 1) both; transform-origin: var(--x) var(--y); transform-box: view-box; }
+@keyframes pop { from { transform: scale(0); } }
+.g-tag rect { fill: var(--surface); stroke: var(--c); stroke-width: 1.5; }
+.g-tag text { font: 600 10.5px var(--f-mono); fill: var(--ink); text-anchor: middle; }
+.g-tag.is-head rect { fill: var(--c); }
+.g-tag.is-head text { fill: #fff; }
+.g-tag.is-remote rect { stroke-dasharray: 3 2; }
+
+/* Action bar + terminal */
+.sim-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.msg { flex: 1 1 200px; min-width: 0; padding: 9px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 14px; }
+.msg:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.sim-term { background: var(--term-bg); color: var(--term-ink); border-radius: var(--r); padding: 12px 14px; font: 12.5px/1.6 var(--f-mono); min-height: 64px; }
+.t-line { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.t-cmd { color: var(--term-ink); }
+.t-cm, .t-cmd.t-cm { color: var(--term-dim); }
+.t-out.ok { color: #6fdca9; } .t-out.err { color: #ff8a8d; }
+.t-out::before { content: '→ '; opacity: .5; }
+
+/* Conflict */
+.conflict { border: 1.5px solid var(--err); background: var(--err-soft); border-radius: var(--r); padding: 12px; display: grid; gap: 10px; animation: rise .3s both; }
+.cf-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.cf-head b { color: var(--err); } .cf-head span { color: var(--ink-2); font-size: 14px; flex: 1; }
+.cf-name { font: 600 13px var(--f-mono); margin-bottom: 6px; }
+.cf-code { margin: 0 0 8px; padding: 10px 12px; border-radius: var(--r-sm); background: var(--term-bg); color: var(--term-ink); font: 12px/1.6 var(--f-mono); overflow-x: auto; display: grid; }
+.cf-m { color: var(--term-dim); } .cf-mine { color: #7fb0ff; } .cf-theirs { color: #ffb36b; }
+.cf-btns { display: flex; flex-wrap: wrap; gap: 6px; border-radius: 99px; }
+.cf-ok { font-weight: 600; color: var(--ok); }
+
+@media (max-width: 760px) {
+  .zones, .zones.no-remote { grid-template-columns: 1fr; }
+  .arrow { flex-direction: row; justify-content: center; }
+  .zone { min-height: 0; }
+}

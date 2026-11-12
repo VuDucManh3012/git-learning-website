@@ -1,0 +1,20 @@
+/* Submodule simulator: parent repo card → pinned SHA → child repo commit chain */
+.sm-grid { display: grid; grid-template-columns: minmax(0, 1fr) 90px minmax(0, 1.3fr); gap: 8px; align-items: stretch; }
+.sm-parent { border-top: 3px solid var(--b1); } .sm-sub { border-top: 3px solid var(--b3); }
+.sm-log { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: 13px; color: var(--ink-2); }
+.sm-log li { padding-left: 14px; position: relative; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sm-log li::before { content: ''; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; border-radius: 99px; background: var(--b1); }
+.sm-pin { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px 10px; border-radius: var(--r-sm); background: var(--surface); border: 1px dashed var(--b3); font: 500 12.5px var(--f-mono); }
+.sm-pin span { color: var(--ink-3); font-family: var(--f-body); }
+.sm-pin code { background: var(--b3); color: #fff; }
+.sm-link { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 26px; color: var(--b3); }
+.sm-link span { font: 500 10px var(--f-mono); color: var(--ink-3); text-align: center; }
+.sm-chain { display: flex; flex-wrap: wrap; gap: 8px; }
+.sm-chain.empty { opacity: .35; filter: grayscale(1); }
+.sm-c { position: relative; display: flex; flex-direction: column; gap: 2px; min-width: 110px; padding: 8px 10px; border-radius: var(--r-sm); background: var(--surface); border: 1px solid var(--line); font-size: 12px; }
+.sm-c code { align-self: flex-start; font-size: 11px; }
+.sm-c span { color: var(--ink-2); }
+.sm-c.is-pin { border: 2px dashed var(--b3); }
+.sm-c.is-head { box-shadow: 0 0 0 2px var(--b2); }
+.sm-c b { position: absolute; top: -9px; right: 8px; padding: 0 6px; border-radius: 99px; background: var(--b2); color: #fff; font: 600 10px var(--f-mono); }
+@media (max-width: 760px) { .sm-grid { grid-template-columns: 1fr; } .sm-link { flex-direction: row; transform: rotate(90deg); } }
